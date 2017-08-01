@@ -1,0 +1,1 @@
+BLUEMIX_SPACE=<%= bxspace %>

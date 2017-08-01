@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Lionel Villard",
+      "authorEmail": "villard@us.ibm.com",
+      "authorUrl": ""
+    }
+  }
+}
