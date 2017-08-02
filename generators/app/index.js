@@ -59,12 +59,12 @@ module.exports = class extends Generator {
 
     try {
       fs.mkdirSync('actions')
-      fs.mkdirSync('environments/dev')
+      fs.mkdirSync('environments')
     } catch (e) {
     }
 
     this.fs.copy(
-      this.templatePath('deploy.sh'),
+      this.templatePath('master-deploy.sh'),
       this.destinationPath('deploy.sh')
     )
     this.fs.copy(
@@ -75,19 +75,28 @@ module.exports = class extends Generator {
       this.templatePath('empty.sh'),
       this.destinationPath('environments/openwhisk.sh')
     )
+    this.fs.copy(
+      this.templatePath('empty'),
+      this.destinationPath('environments/vars.global')
+    )
+    this.fs.copy(
+      this.templatePath('bx-auth.sh'),
+      this.destinationPath('environments/bx-auth.sh')
+    )
     this.fs.copyTpl(
       this.templatePath('bluemix-vars.sh'),
-      this.destinationPath('environments/dev/vars.sh'),
+      this.destinationPath('environments/vars.dev'),
       {bxspace: `${this.appname}-dev`}
     )
 
-    fs.chmodSync('deploy.sh', 0o744)
-    fs.chmodSync('environments/deploy.sh', 0o744)
-    fs.chmodSync('environments/openwhisk.sh', 0o744)
+
   }
 
   install() {
-
+    fs.chmodSync('deploy.sh', 0o744)
+    fs.chmodSync('environments/deploy.sh', 0o744)
+    fs.chmodSync('environments/openwhisk.sh', 0o744)
+    fs.chmodSync('environments/bx-auth.sh', 0o744)
   }
 
 }

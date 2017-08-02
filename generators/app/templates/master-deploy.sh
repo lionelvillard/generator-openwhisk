@@ -14,14 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-function usage() {
-  echo -e "Usage: $0 <env>"
-}
+# The environment name
+ENV=${1:-dev}
 
-if [ "$1" = "" ]; then
-  usage
-else
-  PROJECT_ROOT="$( cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
-  ROOT="${PROJECT_ROOT}/environments"
-  (cd ./environments && ENV="$1" PROJECT_ROOT=${PROJECT_ROOT} ENV_ROOT=${ENV_ROOT} ./deploy.sh)
-fi
+# The project root directory containing this file
+PROJECT_ROOT="$( cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# The directory containing the deployment state.
+STATE_ROOT=${PROJECT_ROOT}/.wskd/${ENV}
+
+mkdir -p $STATE_ROOT
+
+cd ./environments
+
+. ./deploy.sh
