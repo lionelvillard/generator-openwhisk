@@ -21,10 +21,10 @@ ENV=${1:-dev}
 PROJECT_ROOT="$( cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # The directory containing the deployment state.
-STATE_ROOT=${PROJECT_ROOT}/.wskd/${ENV}
+STATE_ROOT=${PROJECT_ROOT}/.openwhisk/envs/${ENV}
 
 mkdir -p $STATE_ROOT
 
-cd ./environments
+cd ./bin
 
 . ./deploy.sh

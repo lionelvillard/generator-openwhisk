@@ -29,10 +29,6 @@ module.exports = class extends Generator {
   }
 
   prompting() {
-    this.log(yosay(
-      'Welcome to the ' + chalk.red('Apache OpenWhisk') + ' project starter!!'
-    ))
-
     const prompts = [{
       type: 'input',
       name: 'name',
@@ -59,7 +55,7 @@ module.exports = class extends Generator {
 
     try {
       fs.mkdirSync('actions')
-      fs.mkdirSync('environments')
+      fs.mkdirSync('bin')
     } catch (e) {
     }
 
@@ -69,34 +65,33 @@ module.exports = class extends Generator {
     )
     this.fs.copy(
       this.templatePath('env-deploy.sh'),
-      this.destinationPath('environments/deploy.sh')
+      this.destinationPath('bin/deploy.sh')
     )
     this.fs.copy(
       this.templatePath('empty.sh'),
-      this.destinationPath('environments/openwhisk.sh')
+      this.destinationPath('bin/openwhisk.sh')
     )
     this.fs.copy(
       this.templatePath('empty'),
-      this.destinationPath('environments/vars.global')
+      this.destinationPath('bin/vars.global')
     )
     this.fs.copy(
       this.templatePath('bx-auth.sh'),
-      this.destinationPath('environments/bx-auth.sh')
+      this.destinationPath('bin/bx-auth.sh')
     )
     this.fs.copyTpl(
       this.templatePath('bluemix-vars.sh'),
-      this.destinationPath('environments/vars.dev'),
+      this.destinationPath('bin/vars.dev'),
       {bxspace: `${this.appname}-dev`}
     )
-
 
   }
 
   install() {
     fs.chmodSync('deploy.sh', 0o744)
-    fs.chmodSync('environments/deploy.sh', 0o744)
-    fs.chmodSync('environments/openwhisk.sh', 0o744)
-    fs.chmodSync('environments/bx-auth.sh', 0o744)
+    fs.chmodSync('bin/deploy.sh', 0o744)
+    fs.chmodSync('bin/openwhisk.sh', 0o744)
+    fs.chmodSync('bin/bx-auth.sh', 0o744)
   }
 
 }
