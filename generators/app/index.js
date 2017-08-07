@@ -73,18 +73,21 @@ module.exports = class extends Generator {
     )
     this.fs.copy(
       this.templatePath('empty'),
-      this.destinationPath('bin/vars.global')
+      this.destinationPath('.global.wskprops')
     )
     this.fs.copy(
       this.templatePath('bx-auth.sh'),
       this.destinationPath('bin/bx-auth.sh')
     )
+    this.fs.copy(
+      this.templatePath('gitignore'),
+      this.destinationPath('./.gitignore')
+    )
     this.fs.copyTpl(
       this.templatePath('bluemix-vars.sh'),
-      this.destinationPath('bin/vars.dev'),
+      this.destinationPath('.dev.wskprops'),
       {bxspace: `${this.appname}-dev`}
     )
-
   }
 
   install() {

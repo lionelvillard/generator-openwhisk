@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Set global variables
-source ./vars.global
+source ../.global.wskprops
 
 # Set per-environment variables. Might override global variables
-source ./vars.${ENV}
+source ../.${ENV}.wskprops
 
 if [ "$BLUEMIX_SPACE" != "" ]; then
   . ./bx-auth.sh
@@ -20,9 +20,9 @@ if [ "$APIHOST" == "" ]; then
   exit 2
 fi
 
-echo APIHOST="${APIHOST}" > ${STATE_ROOT}/.wskprops
-echo AUTH="${AUTH}" >> ${STATE_ROOT}/.wskprops
+echo APIHOST="${APIHOST}" > ../.wskprops
+echo AUTH="${AUTH}" >> ../.wskprops
 
-WSK_CONFIG_FILE=$STATE_ROOT/.wskprops
+WSK_CONFIG_FILE=../.wskprops
 
 . ./openwhisk.sh
