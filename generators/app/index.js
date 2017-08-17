@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict'
+'use strict';
 
-const Generator = require('yeoman-generator')
-const chalk = require('chalk')
-const yosay = require('yosay')
-const fs = require('fs')
-const expandHomeDir = require('expand-home-dir')
-const {exec} = require('child_process')
+const Generator = require('yeoman-generator');
+// const chalk = require('chalk');
+const fs = require('fs');
+const expandHomeDir = require('expand-home-dir');
+const { exec } = require('child_process');
 
 module.exports = class extends Generator {
 
   initializing() {
-    this.appname = this.appname.replace(' ', '-')
+    this.appname = this.appname.replace(' ', '-');
   }
 
   prompting() {
@@ -44,49 +43,49 @@ module.exports = class extends Generator {
       //   name: 'github_repo',
       //   message: 'Your GitHub repository (owner/repo)'
       // }
-    ]
+    ];
 
     return this.prompt(prompts).then(props => {
-      this.props = props
-    })
+      this.props = props;
+    });
   }
 
   writing() {
 
     try {
-      fs.mkdirSync('actions')
-      fs.mkdirSync('bin')
+      fs.mkdirSync('actions');
+      fs.mkdirSync('bin');
     } catch (e) {
     }
 
     this.fs.copy(
       this.templatePath('master-deploy.sh'),
       this.destinationPath('deploy.sh')
-    )
+    );
     this.fs.copy(
       this.templatePath('env-deploy.sh'),
       this.destinationPath('bin/deploy.sh')
-    )
+    );
     this.fs.copy(
       this.templatePath('empty.sh'),
       this.destinationPath('bin/openwhisk.sh')
-    )
+    );
     this.fs.copy(
       this.templatePath('empty'),
       this.destinationPath('.global.wskprops')
-    )
+    );
     this.fs.copy(
       this.templatePath('bx-auth.sh'),
       this.destinationPath('bin/bx-auth.sh')
-    )
+    );
     this.fs.copy(
       this.templatePath('gitignore'),
       this.destinationPath('./.gitignore')
-    )
+    );
     this.fs.copyTpl(
       this.templatePath('bluemix-vars.sh'),
       this.destinationPath('.dev.wskprops'),
-      {bxspace: `${this.appname}-dev`}
+      { bxspace: `${this.appname}-dev` }
     )
   }
 
@@ -97,4 +96,4 @@ module.exports = class extends Generator {
     fs.chmodSync('bin/bx-auth.sh', 0o744)
   }
 
-}
+};
