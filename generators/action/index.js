@@ -86,7 +86,7 @@ module.exports = class extends Generator {
         name: 'nodeversion',
         message: 'Node version',
         choices: [
-          '6.x.x',
+          'default',
           'latest',
           'other'
         ],

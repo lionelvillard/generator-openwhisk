@@ -54,46 +54,52 @@ module.exports = class extends Generator {
 
     try {
       fs.mkdirSync('actions');
-      fs.mkdirSync('bin');
+      fs.mkdirSync('packages');
+      fs.mkdirSync('apis');
+      //fs.mkdirSync('bin');
     } catch (e) {
     }
 
+    // this.fs.copy(
+    //   this.templatePath('master-deploy.sh'),
+    //   this.destinationPath('deploy.sh')
+    // );
     this.fs.copy(
-      this.templatePath('master-deploy.sh'),
-      this.destinationPath('deploy.sh')
+      this.templatePath('openwhisk.yaml'),
+      this.destinationPath('openwhisk.yaml')
     );
-    this.fs.copy(
-      this.templatePath('env-deploy.sh'),
-      this.destinationPath('bin/deploy.sh')
-    );
-    this.fs.copy(
-      this.templatePath('empty.sh'),
-      this.destinationPath('bin/openwhisk.sh')
-    );
-    this.fs.copy(
-      this.templatePath('empty'),
-      this.destinationPath('.global.wskprops')
-    );
-    this.fs.copy(
-      this.templatePath('bx-auth.sh'),
-      this.destinationPath('bin/bx-auth.sh')
-    );
-    this.fs.copy(
-      this.templatePath('gitignore'),
-      this.destinationPath('./.gitignore')
-    );
-    this.fs.copyTpl(
-      this.templatePath('bluemix-vars.sh'),
-      this.destinationPath('.dev.wskprops'),
-      { bxspace: `${this.appname}-dev` }
-    )
+    // this.fs.copy(
+    //   this.templatePath('env-deploy.sh'),
+    //   this.destinationPath('bin/deploy.sh')
+    // );
+    // this.fs.copy(
+    //   this.templatePath('empty.sh'),
+    //   this.destinationPath('bin/openwhisk.sh')
+    // );
+    // this.fs.copy(
+    //   this.templatePath('empty'),
+    //   this.destinationPath('.global.wskprops')
+    // );
+    // this.fs.copy(
+    //   this.templatePath('bx-auth.sh'),
+    //   this.destinationPath('bin/bx-auth.sh')
+    // );
+    // this.fs.copy(
+    //   this.templatePath('gitignore'),
+    //   this.destinationPath('./.gitignore')
+    // );
+    // this.fs.copyTpl(
+    //   this.templatePath('bluemix-vars.sh'),
+    //   this.destinationPath('.dev.wskprops'),
+    //   { bxspace: `${this.appname}-dev` }
+    // )
   }
 
   install() {
-    fs.chmodSync('deploy.sh', 0o744)
-    fs.chmodSync('bin/deploy.sh', 0o744)
-    fs.chmodSync('bin/openwhisk.sh', 0o744)
-    fs.chmodSync('bin/bx-auth.sh', 0o744)
+    //fs.chmodSync('deploy.sh', 0o744)
+    // fs.chmodSync('bin/deploy.sh', 0o744)
+    // fs.chmodSync('bin/openwhisk.sh', 0o744)
+    // fs.chmodSync('bin/bx-auth.sh', 0o744)
   }
 
 };

@@ -1,5 +1,3 @@
 function main(args) {
-  return 'Hello'
+  return {msg: args.msg}
 }
-
-exports.main = main;
